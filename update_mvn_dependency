@@ -1,0 +1,12 @@
+[opc@sr-sandbox-jumpserver helidon-alltitude-demo]$ for i in ojdbc8 ucp osdt_core osdt_cert oraclepki javax.json-1.0.4 json-simple-1.1 orajsoda-1.1.4 org.apache.commons.io xmlparserv2; do echo mvn -X install:install-file " -DgroupId=com.oracle.jdbc" "-DartifactId=$i" "-Dversion=19.3.0" "-Dpackaging=jar" "-Dfile=.m2\\\$i.jar"; done;
+
+mvn -X install:install-file  -DgroupId=com.oracle.jdbc -DartifactId=ojdbc8 -Dversion=19.3.0 -Dpackaging=jar -Dfile=.m2\\ojdbc8.jar
+mvn -X install:install-file  -DgroupId=com.oracle.jdbc -DartifactId=ucp -Dversion=19.3.0 -Dpackaging=jar -Dfile=.m2\\ucp.jar
+mvn -X install:install-file  -DgroupId=com.oracle.jdbc -DartifactId=osdt_core -Dversion=19.3.0 -Dpackaging=jar -Dfile=.m2\\osdt_core.jar
+mvn -X install:install-file  -DgroupId=com.oracle.jdbc -DartifactId=osdt_cert -Dversion=19.3.0 -Dpackaging=jar -Dfile=.m2\\osdt_cert.jar
+mvn -X install:install-file  -DgroupId=com.oracle.jdbc -DartifactId=oraclepki -Dversion=19.3.0 -Dpackaging=jar -Dfile=.m2\\oraclepki.jar
+mvn -X install:install-file  -DgroupId=com.oracle.jdbc -DartifactId=javax.json-1.0.4 -Dversion=19.3.0 -Dpackaging=jar -Dfile=.m2\\javax.json-1.0.4.jar
+mvn -X install:install-file  -DgroupId=com.oracle.jdbc -DartifactId=json-simple-1.1 -Dversion=19.3.0 -Dpackaging=jar -Dfile=.m2\\json-simple-1.1.jar
+mvn -X install:install-file  -DgroupId=com.oracle.jdbc -DartifactId=orajsoda-1.1.4 -Dversion=19.3.0 -Dpackaging=jar -Dfile=.m2\\orajsoda-1.1.4.jar
+mvn -X install:install-file  -DgroupId=com.oracle.jdbc -DartifactId=org.apache.commons.io -Dversion=19.3.0 -Dpackaging=jar -Dfile=.m2\\org.apache.commons.io.jar
+mvn -X install:install-file  -DgroupId=com.oracle.jdbc -DartifactId=xmlparserv2 -Dversion=19.3.0 -Dpackaging=jar -Dfile=.m2\\xmlparserv2.jar

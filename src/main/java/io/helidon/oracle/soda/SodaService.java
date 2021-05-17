@@ -17,6 +17,11 @@ import io.helidon.webserver.Routing;
 import io.helidon.webserver.ServerRequest;
 import io.helidon.webserver.ServerResponse;
 import io.helidon.webserver.Service;
+import oracle.soda.OracleCollection;
+import oracle.soda.OracleCursor;
+import oracle.soda.OracleDatabase;
+import oracle.soda.OracleDocument;
+import oracle.soda.OracleException;
 
 /**
  * A simple service to greet you. Examples:
@@ -43,6 +48,9 @@ public class SodaService implements Service {
     private static final JsonBuilderFactory JSON = Json.createBuilderFactory(Collections.emptyMap());
 
     private static final Logger LOGGER = Logger.getLogger(SodaService.class.getName());
+
+    ProducerService sodaproducer = new ProducerService();
+	public OracleDatabase db = sodaproducer.dbConnect();
 
     SodaService(Config config) {
         greeting.set(config.get("app.greeting").asString().orElse("Ciao"));
@@ -87,7 +95,42 @@ public class SodaService implements Service {
      * @param response the server response
      */
     private void loginUser(ServerRequest request, ServerResponse response) {
+        request.content().as(JsonObject.class)
+            .thenAccept(jo -> checkUserExists(jo, response))
+            .exceptionally(ex -> processErrors(ex, request, response));
+
         sendResponse(response, "logged In");
+    }
+
+    private void checkUserExists(JsonObject jo, ServerResponse response) {
+        if (!jo.containsKey("username") && !jo.containsKey("password") ) {
+            JsonObject jsonErrorObject = JSON.createObjectBuilder()
+                    .add("error", "Credentials not passed correctly")
+                    .build();
+            response.status(Http.Status.BAD_REQUEST_400)
+                    .send(jsonErrorObject);
+            return;
+        }
+
+        String  _valueFilter = "{\"$and\" : [ {\"username\" : "+jo.getString("username")+"}, {\"password\" : "+jo.getString("password")+"} ]}";
+
+        try {
+            OracleDocument filterSpec =
+            db.createDocumentFromString(_valueFilter);
+          
+            OracleCollection col = this.db.openCollection("eshop_users");
+            OracleCursor c = col.find().filter(filterSpec).getCursor();
+
+            if(c.hasNext()){
+                sendResponse(response, "true");
+            } else {
+                sendResponse(response, "false");
+            }
+            
+        } catch (OracleException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     /**
