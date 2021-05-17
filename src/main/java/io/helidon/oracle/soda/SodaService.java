@@ -33,7 +33,7 @@ import io.helidon.webserver.Service;
  * The message is returned as a JSON object
  */
 
-public class GreetService implements Service {
+public class SodaService implements Service {
 
     /**
      * The config value for the key {@code greeting}.
@@ -42,9 +42,9 @@ public class GreetService implements Service {
 
     private static final JsonBuilderFactory JSON = Json.createBuilderFactory(Collections.emptyMap());
 
-    private static final Logger LOGGER = Logger.getLogger(GreetService.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(SodaService.class.getName());
 
-    GreetService(Config config) {
+    SodaService(Config config) {
         greeting.set(config.get("app.greeting").asString().orElse("Ciao"));
     }
 
@@ -56,8 +56,11 @@ public class GreetService implements Service {
     public void update(Routing.Rules rules) {
         rules
             .get("/", this::getDefaultMessageHandler)
-            .get("/{name}", this::getMessageHandler)
-            .put("/greeting", this::updateGreetingHandler);
+            .get("/status", this::getStatus)
+            .post("/login", this::loginUser)
+            .get("/catalog", this::getCatalog)
+            .post("/items/add", this::updateItemHandler)
+            .post("/items/delete", this::updateItemHandler);
     }
 
     /**
@@ -66,7 +69,25 @@ public class GreetService implements Service {
      * @param response the server response
      */
     private void getDefaultMessageHandler(ServerRequest request, ServerResponse response) {
-        sendResponse(response, "World");
+        sendResponse(response, "eShop for oracle soda!!");
+    }
+
+     /**
+     * Return a worldly greeting message.
+     * @param request the server request
+     * @param response the server response
+     */
+    private void getStatus(ServerRequest request, ServerResponse response) {
+        sendResponse(response, "healthy");
+    }
+
+    /**
+     * Return a worldly greeting message.
+     * @param request the server request
+     * @param response the server response
+     */
+    private void loginUser(ServerRequest request, ServerResponse response) {
+        sendResponse(response, "logged In");
     }
 
     /**
@@ -74,8 +95,8 @@ public class GreetService implements Service {
      * @param request the server request
      * @param response the server response
      */
-    private void getMessageHandler(ServerRequest request, ServerResponse response) {
-        String name = request.path().param("name");
+    private void getCatalog(ServerRequest request, ServerResponse response) {
+        String name ="[{\"item\":\"shoe\"}]";
         sendResponse(response, name);
     }
 
@@ -109,8 +130,8 @@ public class GreetService implements Service {
         return null;
     }
 
-    private void updateGreetingFromJson(JsonObject jo, ServerResponse response) {
-        if (!jo.containsKey("greeting")) {
+    private void updateItemFromJson(JsonObject jo, ServerResponse response) {
+        if (!jo.containsKey("item")) {
             JsonObject jsonErrorObject = JSON.createObjectBuilder()
                     .add("error", "No greeting provided")
                     .build();
@@ -119,7 +140,7 @@ public class GreetService implements Service {
             return;
         }
 
-        greeting.set(jo.getString("greeting"));
+        greeting.set(jo.getString("item"));
         response.status(Http.Status.NO_CONTENT_204).send();
     }
 
@@ -128,10 +149,10 @@ public class GreetService implements Service {
      * @param request the server request
      * @param response the server response
      */
-    private void updateGreetingHandler(ServerRequest request,
+    private void updateItemHandler(ServerRequest request,
                                        ServerResponse response) {
         request.content().as(JsonObject.class)
-            .thenAccept(jo -> updateGreetingFromJson(jo, response))
+            .thenAccept(jo -> updateItemFromJson(jo, response))
             .exceptionally(ex -> processErrors(ex, request, response));
     }
 }

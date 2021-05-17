@@ -52,7 +52,7 @@ public final class Main {
         // Try to start the server. If successful, print some info and arrange to
         // print a message at shutdown. If unsuccessful, print the exception.
         webserver.thenAccept(ws -> {
-                    System.out.println("WEB server is up! http://localhost:" + ws.port() + "/greet");
+                    System.out.println("WEB server is up! http://localhost:" + ws.port() + "/eshop");
                     ws.whenShutdown().thenRun(() -> System.out.println("WEB server is DOWN. Good bye!"));
                 })
                 .exceptionallyAccept(t -> {
@@ -72,7 +72,7 @@ public final class Main {
     private static Routing createRouting(Config config) {
 
         MetricsSupport metrics = MetricsSupport.create();
-        GreetService greetService = new GreetService(config);
+        SodaService sodaService = new SodaService(config);
         HealthSupport health = HealthSupport.builder()
                 .addLiveness(HealthChecks.healthChecks())   // Adds a convenient set of checks
                 .build();
@@ -80,7 +80,7 @@ public final class Main {
         return Routing.builder()
                 .register(health)                   // Health at "/health"
                 .register(metrics)                  // Metrics at "/metrics"
-                .register("/greet", greetService)
+                .register("/eshop", sodaService)
                 .build();
     }
 }
