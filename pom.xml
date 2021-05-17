@@ -113,6 +113,66 @@
             <artifactId>helidon-webclient</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.oracle.jdbc</groupId>
+            <artifactId>ojdbc8</artifactId>
+            <version>19.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle.jdbc</groupId>
+            <artifactId>ucp</artifactId>
+            <version>19.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle.jdbc</groupId>
+            <artifactId>osdt_core</artifactId>
+            <version>19.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle.jdbc</groupId>
+            <artifactId>osdt_cert</artifactId>
+            <version>19.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle.jdbc</groupId>
+            <artifactId>oraclepki</artifactId>
+            <version>19.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle.jdbc</groupId>
+            <artifactId>javax.json-1.0.4</artifactId>
+            <version>19.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle.jdbc</groupId>
+            <artifactId>json-20200518</artifactId>
+            <version>19.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle.jdbc</groupId>
+            <artifactId>json-simple-1.1</artifactId>
+            <version>19.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle.jdbc</groupId>
+            <artifactId>nio_char</artifactId>
+            <version>19.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle.jdbc</groupId>
+            <artifactId>orajsoda-1.1.4</artifactId>
+            <version>19.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle.jdbc</groupId>
+            <artifactId>org.apache.commons.io</artifactId>
+            <version>19.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle.jdbc</groupId>
+            <artifactId>xmlparserv2</artifactId>
+            <version>19.3.0</version>
+        </dependency>
     </dependencies>
 
     <build>
