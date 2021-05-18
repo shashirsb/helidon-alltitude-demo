@@ -10,3 +10,6 @@ mvn -X install:install-file  -DgroupId=com.oracle.jdbc -DartifactId=json-simple-
 mvn -X install:install-file  -DgroupId=com.oracle.jdbc -DartifactId=orajsoda-1.1.4 -Dversion=19.3.0 -Dpackaging=jar -Dfile=.m2\\orajsoda-1.1.4.jar
 mvn -X install:install-file  -DgroupId=com.oracle.jdbc -DartifactId=org.apache.commons.io -Dversion=19.3.0 -Dpackaging=jar -Dfile=.m2\\org.apache.commons.io.jar
 mvn -X install:install-file  -DgroupId=com.oracle.jdbc -DartifactId=xmlparserv2 -Dversion=19.3.0 -Dpackaging=jar -Dfile=.m2\\xmlparserv2.jar
+
+mvn -X install:install-file  -DgroupId=com.oracle.jdbc -DartifactId=json-20200518 -Dversion=19.3.0 -Dpackaging=jar -Dfile=.m2\\json-20200518.jar
+mvn -X install:install-file  -DgroupId=com.oracle.jdbc -DartifactId=nio_char -Dversion=19.3.0 -Dpackaging=jar -Dfile=.m2\\nio_char.jar
