@@ -65,9 +65,10 @@ public class SodaService implements Service {
      */
     @Override
     public void update(Routing.Rules rules) {
-        rules.get("/", this::getDefaultMessageHandler).get("/status", this::getStatus).post("/login", this::loginUser)
-                .get("/catalog", this::getCatalog).post("/items/add", this::updateItemHandler)
-                .post("/items/delete", this::updateItemHandler);
+        rules.get("/", this::getDefaultMessageHandler)
+        .get("/status", this::getStatus)
+        .post("/login", this::loginUser)
+        .get("/catalog", this::getCatalog);
     }
 
     /**
@@ -112,7 +113,7 @@ public class SodaService implements Service {
             response.status(Http.Status.BAD_REQUEST_400).send(jsonErrorObject);
             return;
         }
-
+//{"$and" : ["username":"<username>","password":"<assword>"]}
         String _valueFilter = "{\"$and\" : [ {\"username\" : \"" + jo.getString("username") + "\"}, {\"password\" : \""
                 + jo.getString("password") + "\"} ]}";
         // String _valueFilter = "{\"$and\" : [ {\"username\" : \"\"}, {\"password\" :
