@@ -26,7 +26,7 @@ COPY --from=build /helidon/target/helidon-alltitude-demo.jar ./
 COPY --from=build /helidon/target/libs ./libs
 
 # Copy Wallet
-ADD folder /home/opc/Wallet_ALTDB /home/opc/Wallet_ALTDB/
+COPY /home/opc/Wallet_ALTDB/* /home/opc/Wallet_ALTDB/
 
 
 CMD ["java", "-jar", "helidon-alltitude-demo.jar"]
