@@ -22,8 +22,8 @@ FROM scratch
 WORKDIR /helidon
 
 # Copy the binary built in the 1st stage
-COPY --from=build /helidon/target/helidon-alltitude-demo .
+COPY --from=build /helidon/target/helidon-quickstart-se .
 
-ENTRYPOINT ["./helidon-alltitude-demo"]
+ENTRYPOINT ["./helidon-quickstart-se"]
 
 EXPOSE 8080
