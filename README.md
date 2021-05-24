@@ -13,16 +13,13 @@ java -jar target/helidon-alltitude-demo.jar
 ## Exercise the application
 
 ```
-curl -X GET http://localhost:8080/greet
-{"message":"Hello World!"}
+curl -X GET http://localhost:8080/eshop/status
 
-curl -X GET http://localhost:8080/greet/Joe
-{"message":"Hello Joe!"}
 
-curl -X PUT -H "Content-Type: application/json" -d '{"greeting" : "Hola"}' http://localhost:8080/greet/greeting
+curl -X POST http://localhost:8080/eshop/login
 
-curl -X GET http://localhost:8080/greet/Jose
-{"message":"Hola Jose!"}
+
+curl -X POST http://localhost:8080/eshop/catalog
 ```
 
 ## Try health and metrics
